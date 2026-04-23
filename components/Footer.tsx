@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3 mt-4">
               <a
-                href="https://www.facebook.com/slagerijbenoitveerle"
+                href="https://www.facebook.com/gunsschoonheydt"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Bezoek onze Facebookpagina"
