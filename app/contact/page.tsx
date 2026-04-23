@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact & Openingsuren | Slagerij & Traiteur Benoît en Veerle",
@@ -22,7 +23,7 @@ const mapsUrl =
 
 export default function Contact() {
   const now = new Date();
-  const dayIndex = now.getDay(); // 0=sun, 1=mon...
+  const dayIndex = now.getDay();
   const todayName = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"][dayIndex];
 
   return (
@@ -37,9 +38,11 @@ export default function Contact() {
 
       <section className="py-20 bg-creme">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact info */}
-            <div className="space-y-8">
+
+          {/* Top row: info + openingsuren */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+            {/* Contact info + map */}
+            <div className="space-y-6">
               <div className="bg-white rounded-2xl shadow-sm border border-creme-dark p-8">
                 <h2 className="text-2xl font-bold text-antraciet mb-6 flex items-center gap-3">
                   <Phone size={22} className="text-rood" />
@@ -96,22 +99,18 @@ export default function Contact() {
                 </ul>
               </div>
 
-              {/* Map placeholder */}
-              <div className="bg-creme-dark rounded-2xl overflow-hidden h-56 flex items-center justify-center border border-creme-dark shadow-sm">
-                <div className="text-center">
-                  <MapPin size={40} className="text-rood/40 mx-auto mb-2" />
-                  <p className="text-antraciet-light text-sm">
-                    Stroobantsstraat 104, 3040 Huldenberg
-                  </p>
-                  <a
-                    href={mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-block bg-rood text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-rood-dark transition-colors"
-                  >
-                    Bekijk op kaart
-                  </a>
-                </div>
+              {/* Google Maps embed */}
+              <div className="rounded-2xl overflow-hidden shadow-sm border border-creme-dark h-64">
+                <iframe
+                  src="https://maps.google.com/maps?q=Stroobantsstraat+104,+3040+Huldenberg,+Belgium&output=embed&hl=nl&z=15"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Locatie Slagerij Benoît & Veerle"
+                />
               </div>
             </div>
 
@@ -126,14 +125,9 @@ export default function Contact() {
                   {hours.map((row) => {
                     const isToday = row.days === todayName;
                     return (
-                      <tr
-                        key={row.days}
-                        className={`${isToday ? "bg-rood/5 rounded-xl" : ""}`}
-                      >
-                        <td className="py-3 pr-4">
-                          <span
-                            className={`font-medium ${isToday ? "text-rood" : "text-antraciet"}`}
-                          >
+                      <tr key={row.days} className={isToday ? "bg-rood/5" : ""}>
+                        <td className="py-3.5 pr-4">
+                          <span className={`font-medium ${isToday ? "text-rood" : "text-antraciet"}`}>
                             {row.days}
                             {isToday && (
                               <span className="ml-2 text-xs bg-rood text-white px-2 py-0.5 rounded-full">
@@ -142,12 +136,8 @@ export default function Contact() {
                             )}
                           </span>
                         </td>
-                        <td className="py-3 text-right">
-                          <span
-                            className={`font-medium ${
-                              row.closed ? "text-red-400" : "text-antraciet-light"
-                            }`}
-                          >
+                        <td className="py-3.5 text-right">
+                          <span className={`font-medium ${row.closed ? "text-red-400" : "text-antraciet-light"}`}>
                             {row.time}
                           </span>
                         </td>
@@ -165,6 +155,16 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+          {/* Contact form */}
+          <div className="bg-white rounded-2xl shadow-sm border border-creme-dark p-8 md:p-10">
+            <h2 className="text-2xl font-bold text-antraciet mb-2">Stuur ons een bericht</h2>
+            <p className="text-antraciet-light mb-8">
+              Heeft u een vraag of wilt u meer informatie? Wij antwoorden zo snel mogelijk.
+            </p>
+            <ContactForm />
+          </div>
+
         </div>
       </section>
     </>

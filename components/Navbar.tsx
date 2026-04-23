@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { siteConfig } from "@/lib/config";
 
-const navLinks = [
+const baseLinks = [
   { href: "/", label: "Home" },
   { href: "/over-ons", label: "Over Ons" },
   { href: "/ons-aanbod", label: "Ons Aanbod" },
@@ -17,18 +19,23 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const navLinks = siteConfig.kerstmenuActief
+    ? [...baseLinks.slice(0, 3), { href: "/kerstmenu", label: "🎄 Kerstmenu" }, ...baseLinks.slice(3)]
+    : baseLinks;
+
   return (
     <header className="bg-rood shadow-md sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link
-            href="/"
-            className="text-white font-bold text-lg leading-tight hover:text-creme-dark transition-colors"
-          >
-            <span className="block text-xl">Benoît &amp; Veerle</span>
-            <span className="block text-xs font-normal text-red-200">
-              Slagerij &amp; Traiteur · Huldenberg
-            </span>
+        <div className="flex items-center justify-between h-20">
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/B&V_wit_transparant.png"
+              alt="Benoît & Veerle Slagerij-Traiteur"
+              width={120}
+              height={80}
+              className="h-14 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}

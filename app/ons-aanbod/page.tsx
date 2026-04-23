@@ -20,7 +20,7 @@ const categories = [
       { name: "Lamsvlees", note: "" },
       { name: "Kalfsvlees", note: "" },
       { name: "Gevogelte", note: "" },
-      { name: "Ree & hert", note: "seizoensgebonden", seasonal: true },
+      { name: "Ree, hert & everzwijn", note: "seizoensgebonden", seasonal: true },
     ],
   },
   {

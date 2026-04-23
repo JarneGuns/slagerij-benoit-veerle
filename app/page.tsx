@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, Leaf, Heart, Star } from "lucide-react";
 
 export default function Home() {
@@ -6,10 +7,22 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative bg-rood overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+          }}
         />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 flex flex-col items-center text-center">
+          <Image
+            src="/B&V_wit_transparant.png"
+            alt="Benoît & Veerle Slagerij-Traiteur"
+            width={220}
+            height={147}
+            className="h-36 w-auto object-contain mb-10"
+            priority
+          />
           <p className="text-red-200 text-sm font-medium uppercase tracking-widest mb-4">
             Ambachtelijke dorpsslager · Huldenberg
           </p>
@@ -20,22 +33,22 @@ export default function Home() {
             Uw ambachtelijke dorpsslager in Huldenberg voor vers vlees, huisbereide
             charcuterie en traiteurgerechten.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/ons-aanbod"
-              className="inline-flex items-center justify-center gap-2 bg-white text-rood font-semibold px-8 py-4 rounded-xl hover:bg-creme transition-colors shadow-lg text-base"
-            >
-              Bekijk ons aanbod
-              <ChevronRight size={20} />
-            </Link>
-            <Link
-              href="/bestellen"
-              className="inline-flex items-center justify-center gap-2 bg-rood-dark text-white font-semibold px-8 py-4 rounded-xl hover:bg-antraciet transition-colors border border-red-700 text-base"
-            >
-              Plaats een bestelling
-              <ChevronRight size={20} />
-            </Link>
-          </div>
+
+          {/* Primary CTA */}
+          <Link
+            href="/bestellen"
+            className="inline-flex items-center justify-center gap-3 bg-white text-rood font-bold px-8 py-5 rounded-2xl hover:bg-creme transition-colors shadow-xl text-lg mb-4 w-full max-w-xl"
+          >
+            <ChevronRight size={22} />
+            Bij ons kan u uw bestelling online plaatsen — klik hier
+          </Link>
+
+          <Link
+            href="/ons-aanbod"
+            className="inline-flex items-center justify-center gap-2 text-red-200 hover:text-white transition-colors text-sm font-medium underline underline-offset-4"
+          >
+            Bekijk eerst ons aanbod
+          </Link>
         </div>
       </section>
 
