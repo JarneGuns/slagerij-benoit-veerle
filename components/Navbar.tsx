@@ -5,10 +5,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { siteConfig } from "@/lib/config";
-
 const baseLinks = [
   { href: "/", label: "Home" },
+  { href: "/kerstmenu", label: "Kerstmenu" },
   { href: "/over-ons", label: "Over Ons" },
   { href: "/ons-aanbod", label: "Ons Aanbod" },
   { href: "/bestellen", label: "Bestellen" },
@@ -19,9 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const navLinks = siteConfig.kerstmenuActief
-    ? [...baseLinks.slice(0, 3), { href: "/kerstmenu", label: "🎄 Kerstmenu" }, ...baseLinks.slice(3)]
-    : baseLinks;
+  const navLinks = baseLinks;
 
   return (
     <header className="bg-rood shadow-md sticky top-0 z-50">
@@ -31,9 +28,9 @@ export default function Navbar() {
             <Image
               src="/B&V_wit_transparant.png"
               alt="Benoît & Veerle Slagerij-Traiteur"
-              width={120}
-              height={80}
-              className="h-14 w-auto object-contain"
+              width={180}
+              height={120}
+              className="h-20 w-auto object-contain"
               priority
             />
           </Link>
