@@ -139,7 +139,7 @@ function OrderFormInner() {
         <DatePicker
           id="afhaaldatum"
           selected={afhaalDatetime}
-          onChange={(val) => {
+          onChange={(val: Date | null) => {
             setAfhaalDatetime(val);
             setValue("afhaaldatum", val ? val.toISOString() : "", { shouldValidate: true });
           }}

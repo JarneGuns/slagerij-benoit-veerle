@@ -18,7 +18,8 @@ export type KerstorderData = {
   telefoon: string;
   email: string;
   adres: string;
-  gemeente: string;
+  plaats: string;
+  postcode: string;
   afhaaldatum: string;
   afhaaluur: string;
   opmerkingen: string;
@@ -55,7 +56,7 @@ export async function sendKerstorder(data: KerstorderData): Promise<ActionResult
             <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0;width:140px"><strong>Naam</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.voornaam} ${data.familienaam}</td></tr>
             <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0"><strong>Telefoon</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.telefoon}</td></tr>
             <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0"><strong>E-mail</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.email}</td></tr>
-            <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0"><strong>Adres</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.adres}, ${data.gemeente}</td></tr>
+            <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0"><strong>Adres</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.adres}, ${data.postcode} ${data.plaats}</td></tr>
             <tr><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0"><strong>Afhaling</strong></td><td style="padding:8px 12px;border-bottom:1px solid #F5EDE0">${data.afhaaldatum} om ${data.afhaaluur}</td></tr>
           </table>
 
