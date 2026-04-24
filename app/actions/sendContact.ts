@@ -16,8 +16,8 @@ export type ActionResult = { success: true } | { success: false; error: string }
 export async function sendContact(data: ContactData): Promise<ActionResult> {
   try {
     await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: "info@benoitveerle.be",
+      from: "Benoît & Veerle <contact@benoitveerle.be>",
+      to: "jarneguns@gmail.com",
       subject: `Nieuw contactbericht van ${data.naam}`,
       replyTo: data.email,
       html: `
