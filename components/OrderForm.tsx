@@ -6,6 +6,12 @@ import { z } from "zod";
 import { useState } from "react";
 import { sendOrder } from "@/app/actions/sendOrder";
 import { CheckCircle, Loader2 } from "lucide-react";
+import DatePicker, { registerLocale } from "react-datepicker";
+import { nl } from "date-fns/locale/nl";
+import "react-datepicker/dist/react-datepicker.css";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
+registerLocale("nl", nl);
 
 const schema = z.object({
   voornaam: z.string().min(2, "Voornaam is verplicht"),
@@ -34,19 +40,23 @@ function Label({ children, htmlFor }: { children: React.ReactNode; htmlFor: stri
 const inputClass =
   "w-full border border-creme-dark rounded-xl px-4 py-3 text-antraciet bg-creme focus:outline-none focus:ring-2 focus:ring-rood focus:border-transparent transition-shadow placeholder:text-gray-400 text-base";
 
-export default function OrderForm() {
+function OrderFormInner() {
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [afhaalDatetime, setAfhaalDatetime] = useState<Date | null>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
     setServerError(null);
-    const result = await sendOrder(data);
+    const token = executeRecaptcha ? await executeRecaptcha("submit_order") : "";
+    const result = await sendOrder(data, token);
     if (result.success) {
       setSubmitted(true);
     } else {
@@ -67,7 +77,7 @@ export default function OrderForm() {
     );
   }
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
@@ -125,14 +135,27 @@ export default function OrderForm() {
       </div>
 
       <div>
-        <Label htmlFor="afhaaldatum">Afhaaldatum *</Label>
-        <input
+        <Label htmlFor="afhaaldatum">Afhaaldatum & -uur *</Label>
+        <DatePicker
           id="afhaaldatum"
-          type="date"
-          min={today}
+          selected={afhaalDatetime}
+          onChange={(val) => {
+            setAfhaalDatetime(val);
+            setValue("afhaaldatum", val ? val.toISOString() : "", { shouldValidate: true });
+          }}
+          minDate={today}
+          locale="nl"
+          dateFormat="dd/MM/yyyy HH:mm"
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={30}
+          timeCaption="Uur"
+          placeholderText="Kies datum en uur"
+          autoComplete="off"
+          wrapperClassName="w-full"
           className={inputClass}
-          {...register("afhaaldatum")}
         />
+        <input type="hidden" {...register("afhaaldatum")} />
         <FieldError message={errors.afhaaldatum?.message} />
       </div>
 
@@ -173,5 +196,13 @@ export default function OrderForm() {
         * Verplichte velden. Wij gebruiken uw gegevens enkel voor de verwerking van uw bestelling.
       </p>
     </form>
+  );
+}
+
+export default function OrderForm() {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+      <OrderFormInner />
+    </GoogleReCaptchaProvider>
   );
 }

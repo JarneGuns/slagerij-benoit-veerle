@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Heart, Users } from "lucide-react";
+import { Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Over Ons | Slagerij & Traiteur Benoît en Veerle",
@@ -14,92 +14,79 @@ export default function OverOns() {
       <section className="bg-rood py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-red-200 text-sm uppercase tracking-widest mb-2">Ons verhaal</p>
-          <h1 className="text-white text-4xl md:text-5xl font-bold">Over Ons</h1>
+          <h1 className="text-white text-4xl md:text-5xl font-bold">Benoît en Veerle</h1>
         </div>
       </section>
 
-      {/* Main content */}
+      {/* Wie zijn we */}
       <section className="py-20 bg-creme">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Text */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-rood/10 text-rood px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Heart size={16} />
-                Met hart en ziel
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-antraciet mb-6 leading-tight">
-                Van kleuterklas tot slagerijkraam — een onverwacht avontuur.
-              </h2>
-              <div className="space-y-4 text-antraciet-light text-lg leading-relaxed">
-                <p>
-                  Veerle werkte 10 jaar als kleuterleidster in de regio Tervuren voordat ze
-                  de stap naar de slagerij zette. Toen ze Benoît leerde kennen, sprong de vonk
-                  niet alleen over op hem, maar ook op het slagersvak.
-                </p>
-                <p>
-                  Samen runnen zij de zaak nu met hart en ziel. Onze passie ligt in het
-                  sociale contact met onze klanten en het aanbieden van producten waar we zelf
-                  100% achter staan.
-                </p>
-              </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-antraciet mb-10">Wie zijn we?</h2>
 
-              <div className="mt-10 grid grid-cols-2 gap-6">
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-creme-dark text-center">
-                  <p className="text-4xl font-bold text-rood mb-1">25+</p>
-                  <p className="text-antraciet-light text-sm">Jaar ervaring</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-creme-dark text-center">
-                  <p className="text-4xl font-bold text-rood mb-1">100%</p>
-                  <p className="text-antraciet-light text-sm">Eigen bereiding</p>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-6 text-antraciet text-lg leading-relaxed">
+            <p>
+              Benoît Guns, gestudeerd aan het COOVI instituut te Anderlecht, slagerij-beenhouwerij,
+              met specialisatiejaar traiteurbereidingen. Ik ben na m&apos;n studies enkele jaren gaan
+              werken en ben in 1998 als zelfstandige &ldquo;beenhouwer-traiteur&rdquo; begonnen in de
+              Stroobantsstraat 104, te Huldenberg.
+            </p>
+            <p>
+              Veerle Schoonheydt, afgestudeerd aan Groep-T als kleuterleidster, heb een 10-tal jaren
+              in het onderwijs gestaan in de regio van Tervuren. Een zeer leuke job! Maar toen ik
+              Benoît op m&apos;n pad tegenkwam, kwam ook de liefde voor de zaak. Het bedienen van
+              klanten doe ik met hart en ziel. We zijn een dorpswinkel met een dorpsmentaliteit: een
+              praatje, een mopje, een luisterend oor&nbsp;&hellip;
+            </p>
+            <p>Wij hebben samen 3 kinderen: Jarne, Lotte &amp; Roan.</p>
+          </div>
 
-            {/* Photo placeholder */}
-            <div className="relative">
-              <div className="bg-creme-dark rounded-3xl overflow-hidden aspect-[4/3] flex items-center justify-center shadow-lg border border-creme-dark">
-                <div className="text-center p-8">
-                  <Users size={64} className="text-rood/30 mx-auto mb-4" />
-                  <p className="text-antraciet-light text-sm">
-                    Foto van de zaak / het team
-                  </p>
+          {/* Foto's */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="bg-creme-dark rounded-2xl aspect-[4/3] flex items-center justify-center border border-creme-dark shadow-sm"
+              >
+                <div className="text-center p-4">
+                  <Users size={40} className="text-rood/30 mx-auto mb-2" />
+                  <p className="text-antraciet-light text-xs">Foto {i}</p>
                 </div>
               </div>
-              {/* Decorative accent */}
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-rood/10 rounded-3xl -z-10" />
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-rood/5 rounded-2xl -z-10" />
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Values */}
+      {/* Onze visie */}
       <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-antraciet text-center mb-12">
-            Onze waarden
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-antraciet mb-10">
+            Onze visie
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Kwaliteit",
-                text: "Enkel de beste grondstoffen. Wij werken met lokale leveranciers en selecteren persoonlijk elke levering.",
-              },
-              {
-                title: "Eerlijkheid",
-                text: "Transparante prijzen, eerlijk advies. Wij verkopen u wat u nodig heeft, niet meer.",
-              },
-              {
-                title: "Gemeenschap",
-                text: "Wij zijn trots deel uit te maken van Huldenberg. De dorpsgemeenschap is onze familie.",
-              },
-            ].map((v) => (
-              <div key={v.title} className="border-l-4 border-rood pl-6">
-                <h3 className="font-bold text-antraciet text-xl mb-2">{v.title}</h3>
-                <p className="text-antraciet-light leading-relaxed">{v.text}</p>
-              </div>
-            ))}
+
+          <div className="space-y-8 text-antraciet text-lg leading-relaxed">
+            <div>
+              <p className="font-semibold mb-4">Werken in de beenhouwerij:</p>
+              <ul className="space-y-2 ml-4">
+                {[
+                  "doen we met gedrevenheid",
+                  "doen we met hart & ziel",
+                  "is onze passie!",
+                  "is véél sociaal contact hebben met verschillende mensen",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="text-rood font-bold mt-1">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-semibold mb-2">Onze accenten liggen op:</p>
+              <p>de smaak, de kwaliteit van het vlees en het gerecht.</p>
+              <p className="mt-2">Klantvriendelijkheid is één van onze troeven.</p>
+            </div>
           </div>
         </div>
       </section>

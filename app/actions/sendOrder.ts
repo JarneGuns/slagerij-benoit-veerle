@@ -19,12 +19,14 @@ export type ActionResult =
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr);
-  return d.toLocaleDateString("nl-BE", {
+  const date = d.toLocaleDateString("nl-BE", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+  const time = d.toLocaleTimeString("nl-BE", { hour: "2-digit", minute: "2-digit" });
+  return `${date} om ${time}`;
 }
 
 function shopEmailHtml(data: OrderData): string {
@@ -119,8 +121,18 @@ function confirmationEmailHtml(data: OrderData): string {
 </body></html>`;
 }
 
-export async function sendOrder(data: OrderData): Promise<ActionResult> {
+export async function sendOrder(data: OrderData, recaptchaToken: string): Promise<ActionResult> {
   try {
+    const verify = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+    });
+    const { success, score } = await verify.json() as { success: boolean; score: number };
+    if (!success || score < 0.5) {
+      return { success: false, error: "Verificatie mislukt. Probeer het opnieuw." };
+    }
+
     await Promise.all([
       resend.emails.send({
         from: "onboarding@resend.dev",

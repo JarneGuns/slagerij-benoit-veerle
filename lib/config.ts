@@ -1,3 +1,1 @@
-export const siteConfig = {
-  kerstmenuActief: true,
-} as const;
+export const siteConfig = {} as const;
