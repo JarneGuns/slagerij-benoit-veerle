@@ -27,7 +27,7 @@ export default function Bestellen() {
             <div>
               <p className="font-semibold text-amber-800">Bestelling op voorhand</p>
               <p className="text-amber-700 text-sm mt-1">
-                Graag <strong>één week op voorhand</strong> bestellen voor traiteurgerechten,
+                Graag <strong>één week op voorhand </strong> bestellen voor traiteurgerechten,
                 buffetten en feestmenu&apos;s.
               </p>
             </div>
