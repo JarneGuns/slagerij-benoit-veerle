@@ -123,14 +123,14 @@ export async function sendOrder(data: OrderData): Promise<ActionResult> {
   try {
     await Promise.all([
       resend.emails.send({
-        from: "Benoît & Veerle <bestellingen@benoitveerle.be>",
+        from: "onboarding@resend.dev",
         to: "jarneguns@gmail.com",
         subject: `Nieuwe bestelling van ${data.voornaam} ${data.achternaam} — afhaling ${formatDate(data.afhaaldatum)}`,
         html: shopEmailHtml(data),
         replyTo: data.email,
       }),
       resend.emails.send({
-        from: "Benoît & Veerle <bestellingen@benoitveerle.be>",
+        from: "onboarding@resend.dev",
         to: data.email,
         subject: "Uw bestelling bij Slagerij Benoît & Veerle is ontvangen",
         html: confirmationEmailHtml(data),
