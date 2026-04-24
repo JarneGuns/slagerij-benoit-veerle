@@ -438,7 +438,6 @@ export default function KerstmenuOrderForm() {
   const [sauceChoices, setSauceChoices] = useState<Record<string, string>>({});
   const [aardappelChoices, setAardappelChoices] = useState<Record<string, string>>({});
   const [afhaaldatum, setAfhaaldatum] = useState<Date | null>(null);
-  const [afhaaluur, setAfhaaluur] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -490,7 +489,9 @@ export default function KerstmenuOrderForm() {
       afhaaldatum: afhaaldatum
         ? afhaaldatum.toLocaleDateString("nl-BE", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
         : "",
-      afhaaluur,
+      afhaaluur: afhaaldatum
+        ? afhaaldatum.toLocaleTimeString("nl-BE", { hour: "2-digit", minute: "2-digit", hour12: false })
+        : "",
       lines,
     });
 
@@ -649,41 +650,25 @@ export default function KerstmenuOrderForm() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="afhaaldatum">Afhaaldatum *</Label>
-                <p className="text-xs text-antraciet-light mb-1.5">Bekijk hierboven de mogelijke afhaalmomenten</p>
-                <DatePicker
-                  id="afhaaldatum"
-                  selected={afhaaldatum}
-                  onChange={(val: Date | null) => setAfhaaldatum(val)}
-                  minDate={today}
-                  locale="nl"
-                  dateFormat="dd/MM/yyyy"
-                  placeholderText="DD/MM/JJJJ"
-                  autoComplete="off"
-                  wrapperClassName="w-full"
-                  className={inputClass}
-                />
-              </div>
-              <div>
-                <Label htmlFor="afhaaluur">Afhaaluur *</Label>
-                <select
-                  id="afhaaluur"
-                  value={afhaaluur}
-                  onChange={(e) => setAfhaaluur(e.target.value)}
-                  className={inputClass}
-                >
-                  <option value="">— Kies een uur —</option>
-                  {Array.from({ length: 25 }, (_, i) => {
-                    const h = Math.floor(i / 2) + 7;
-                    const m = i % 2 === 0 ? "00" : "30";
-                    return `${String(h).padStart(2, "0")}:${m}`;
-                  }).map((t) => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
-              </div>
+            <div>
+              <Label htmlFor="afhaaldatum">Afhaaldatum &amp; -uur *</Label>
+              <p className="text-xs text-antraciet-light mb-1.5">Bekijk hierboven de mogelijke afhaalmomenten</p>
+              <DatePicker
+                id="afhaaldatum"
+                selected={afhaaldatum}
+                onChange={(val: Date | null) => setAfhaaldatum(val)}
+                minDate={today}
+                locale="nl"
+                dateFormat="dd/MM/yyyy HH:mm"
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={30}
+                timeCaption="Uur"
+                placeholderText="Kies datum en uur"
+                autoComplete="off"
+                wrapperClassName="block w-full"
+                className={inputClass}
+              />
             </div>
 
             <div>
