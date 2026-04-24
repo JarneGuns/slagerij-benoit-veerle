@@ -656,7 +656,7 @@ export default function KerstmenuOrderForm() {
                 <DatePicker
                   id="afhaaldatum"
                   selected={afhaaldatum}
-                  onChange={(val) => setAfhaaldatum(val)}
+                  onChange={(val: Date | null) => setAfhaaldatum(val)}
                   minDate={today}
                   locale="nl"
                   dateFormat="dd/MM/yyyy"
