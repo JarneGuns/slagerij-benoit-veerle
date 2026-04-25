@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-rood overflow-hidden">
+      <section className="relative bg-rood overflow-hidden min-h-screen">
         <div
           className="absolute inset-0 opacity-10"
           style={{
